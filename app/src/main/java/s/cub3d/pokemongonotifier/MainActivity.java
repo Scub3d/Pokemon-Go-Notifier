@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         HandleRequests hr = new HandleRequests();
-        Log.d("---------------", "STARTING");
         hr.requestServerStatus();
     }
 

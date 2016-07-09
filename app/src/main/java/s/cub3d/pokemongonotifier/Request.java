@@ -5,13 +5,10 @@ package s.cub3d.pokemongonotifier;
  */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 import android.os.AsyncTask;
 import android.util.Log;
-
-
 import org.json.JSONException;
 
 public class Request {
@@ -35,10 +32,7 @@ public class Request {
             handleResponseInterface.handleResponse(information);
         } catch (JSONException e) {
             e.printStackTrace();
-
-            Log.d("1q2341235123541253", "OMGOMGOMG");
         }
-
     }
 
     private void errorOccurred() {
