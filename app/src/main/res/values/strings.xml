@@ -3,4 +3,16 @@
     <string name="action_settings">Settings</string>
     <string name="pokemon_go_status">Pokemon Go Status</string>
     <string name="online_text">Online</string>
+    <string name="settingSwitchText">Update on Widget Tap/Press</string>
+    <string name="settingSwitchNoteText">*If this is switched off, the widget will update itself every minute. This however, will increase battery consumption.</string>
+
+    <string name="about">About</string>
+    <string name="aboutNote">This was made by: </string>
+    <string name="scub3d">Spenser Solys</string>
+    <string name="chinchalupa">Jeremy Wright</string>
+    <string name="healbadbad">Nathan Blank</string>
+
+    <string name="websiteNote">We are currently using this website to get the server status: contact@cmmcd.com</string>
+    <string name="donateText">If you would like to donate to keep his server up follow this link: www.paypal.me/cmmcd</string>
+
 </resources>
