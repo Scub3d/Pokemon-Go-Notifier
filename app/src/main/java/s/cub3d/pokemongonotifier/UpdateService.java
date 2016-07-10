@@ -75,7 +75,9 @@ public class UpdateService extends IntentService {
             views.setOnClickPendingIntent(R.id.pokemonWidgetFrame, pendingIntent);
             Log.d("NathanTesting", "Set the click Listener?");
 
-            int status = HandleRequests.getServerStatusVariable();
+            HandleRequests hr = new HandleRequests();
+            hr.requestServerStatus();
+            int status = hr.getServerStatusVariable();
             int color = getResources().getColor(R.color.orange);
             String statusText = "Unknown";
             if(status == 2) {
