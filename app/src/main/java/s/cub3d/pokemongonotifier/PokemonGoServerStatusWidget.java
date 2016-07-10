@@ -30,7 +30,7 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
 
         Log.d("NathanTesting","update Success");
         context.startService(update);
-        Log.d("NathanTesting", "Started the service");
+        Log.d("NathanTesting", "Started the service!");
 
         if(alarmEnabled){
             Log.d("NathanTesting", "Started the Alarm");
@@ -41,7 +41,7 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
             final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 //            alarm.cancel(pending);
             long interval = 1000*60;
-            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
+            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(),interval, pending);
         }
 
         final int N = appWidgetIds.length;
