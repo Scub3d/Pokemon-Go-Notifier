@@ -3,8 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="pokemon_go_status">Pokemon Go Status</string>
     <string name="online_text">Online</string>
-    <string name="settingSwitchText">Update on Widget Tap/Press</string>
-    <string name="settingSwitchNoteText">*If this is switched off, the widget will update itself every minute. This however, will increase battery consumption.</string>
+    <string name="settingMainText">The widget will update itself on tap/press by default.</string>
+    <string name="settingSwitchText">Update Widget Every Minute</string>
+    <string name="settingSwitchNoteText">*If this is switched on, the widget will update itself every minute. This however, will increase battery consumption.</string>
 
     <string name="about">About</string>
     <string name="aboutNote">This was made by: </string>
