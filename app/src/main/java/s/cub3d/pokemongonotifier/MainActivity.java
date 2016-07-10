@@ -35,15 +35,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
 	HandleRequests hr = new HandleRequests();
         hr.requestServerStatus();
 
@@ -57,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
         s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // do something, the isChecked will be
-                // true if the switch is in the On position
-                writeToFile(String.valueOf(isChecked));
+                Log.d("chchchchc", "+ " + isChecked);
+                if(isChecked)
+                    PokemonGoServerStatusWidget.createAlarm(getApplicationContext());
+                else
+                    PokemonGoServerStatusWidget.cancelAlarm(getApplicationContext());
             }
         });
     }
@@ -84,44 +77,44 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void writeToFile(String data) {
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("pokemonGoNotifier.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(data);
-            outputStreamWriter.close();
-        }
-        catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
-    private String readFromFile() {
-        String ret = "";
-        try {
-            InputStream inputStream = openFileInput("pokemonGoNotifier.txt");
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append(receiveString);
-                }
-
-                inputStream.close();
-                ret = stringBuilder.toString();
-                Log.d("=-=-=-=-=-=-==--=", ret);
-            }
-        }
-        catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        }
-
-        return ret;
-    }
+//    private void writeToFile(String data) {
+//        try {
+//            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("pokemonGoNotifier.txt", Context.MODE_PRIVATE));
+//            outputStreamWriter.write(data);
+//            outputStreamWriter.close();
+//        }
+//        catch (IOException e) {
+//            Log.e("Exception", "File write failed: " + e.toString());
+//        }
+//    }
+//
+//    private String readFromFile() {
+//        String ret = "";
+//        try {
+//            InputStream inputStream = openFileInput("pokemonGoNotifier.txt");
+//            if ( inputStream != null ) {
+//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+//                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//                String receiveString = "";
+//                StringBuilder stringBuilder = new StringBuilder();
+//
+//                while ( (receiveString = bufferedReader.readLine()) != null ) {
+//                    stringBuilder.append(receiveString);
+//                }
+//
+//                inputStream.close();
+//                ret = stringBuilder.toString();
+//                Log.d("=-=-=-=-=-=-==--=", ret);
+//            }
+//        }
+//        catch (FileNotFoundException e) {
+//            Log.e("login activity", "File not found: " + e.toString());
+//        } catch (IOException e) {
+//            Log.e("login activity", "Can not read file: " + e.toString());
+//        }
+//
+//        return ret;
+//    }
 
 
 }
