@@ -19,7 +19,6 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
 
     public static String PACKAGE_NAME;
 
-    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
         // Useful for setting loading spinner
@@ -35,13 +34,14 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
 
         if(alarmEnabled){
             Log.d("NathanTesting", "Started the Alarm");
-            final Intent intent = new Intent(context, PokemonGoServerStatusWidget.class);
+            final Intent intent = new Intent(context, UpdateService.class);
             intent.putExtra("ServerStatus",-1);
             intent.putExtra("toRequest?",1);
             final PendingIntent pending = PendingIntent.getService(context, 0, intent, 0);
             final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 3000, 1000, pending);
-
+//            alarm.cancel(pending);
+            long interval = 1000*2;
+            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
         }
 
         final int N = appWidgetIds.length;
@@ -62,17 +62,6 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
-    }
-
-
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Log.d("Bug check", "MaLuBuTestWidgetProvider.onReceive()");
-
-        String action = intent.getAction();
-        Log.d("onReceive", "action: " + action);
-        Log.d("@@@@@@@@@@@@@@@@@@@", "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 
 }
