@@ -33,7 +33,12 @@
 
         <service
             android:name=".UpdateService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <receiver
+            android:name=".PokeAlarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>

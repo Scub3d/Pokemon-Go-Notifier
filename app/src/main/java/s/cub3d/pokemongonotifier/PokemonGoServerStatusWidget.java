@@ -31,14 +31,18 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
         Log.d("NathanTesting","update Success");
         context.startService(update);
         Log.d("NathanTesting", "Started the service");
-//        if(alarmEnabled){
-//            final Intent intent = new Intent(context, PokemonGoServerStatusWidget.class);
-//            final PendingIntent pending = PendingIntent.getService(context, 0, intent, 0);
-//            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        if(alarmEnabled){
+            Log.d("NathanTesting", "Started the Alarm");
+            final Intent intent = new Intent(context, UpdateService.class);
+            intent.putExtra("ServerStatus",-1);
+            intent.putExtra("toRequest?",1);
+            final PendingIntent pending = PendingIntent.getService(context, 0, intent, 0);
+            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 //            alarm.cancel(pending);
-//            long interval = 1000*60;
-//            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(),interval, pending);
-//        }
+            long interval = 1000*2;
+            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
+        }
 
         final int N = appWidgetIds.length;
 
