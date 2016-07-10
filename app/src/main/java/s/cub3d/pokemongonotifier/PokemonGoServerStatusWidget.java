@@ -16,9 +16,18 @@ import android.widget.RemoteViews;
 public class PokemonGoServerStatusWidget extends AppWidgetProvider {
     private boolean alarmEnabled = true;
     private boolean alarmActive = false;
+
+    public static String PACKAGE_NAME;
+
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+
+        // Useful for setting loading spinner
+        PACKAGE_NAME = context.getPackageName();
         Intent update = new Intent(context, UpdateService.class);
         update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+        update.putExtra("ServerStatus",-1);
+        update.putExtra("toRequest?",1);
+
         Log.d("NathanTesting","update Success");
         context.startService(update);
         Log.d("NathanTesting", "Started the service");

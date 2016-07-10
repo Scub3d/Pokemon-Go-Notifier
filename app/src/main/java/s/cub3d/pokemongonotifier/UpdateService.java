@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
@@ -19,14 +20,8 @@ import android.widget.TextView;
  * helper methods.
  */
 public class UpdateService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_FOO = "s.cub3d.pokemongonotifier.action.FOO";
-    private static final String ACTION_BAZ = "s.cub3d.pokemongonotifier.action.BAZ";
 
-    // TODO: Rename parameters
-    private static final String EXTRA_PARAM1 = "s.cub3d.pokemongonotifier.extra.PARAM1";
-    private static final String EXTRA_PARAM2 = "s.cub3d.pokemongonotifier.extra.PARAM2";
+    private int status = -1;
 
     public UpdateService() {
         super("UpdateService");
@@ -39,29 +34,32 @@ public class UpdateService extends IntentService {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = extras
                 .getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
-        update(appWidgetManager, appWidgetIds);
+        int toRequest = extras.getInt("toRequest?");
+        int status = extras.getInt("ServerStatus");
+        this.status = status;
+        if(toRequest==1){
+            HandleRequests hr = new HandleRequests();
+            hr.requestServerStatus();
+            hr.setThisContext(this.getApplicationContext());
+            hr.setAppWidgetIds(appWidgetIds);
+            RemoteViews views = new RemoteViews(getPackageName(), R.layout.pokemon_go_widget_initial_layout);
+            views.setViewVisibility(R.id.requestStatus, View.VISIBLE);
+            for (int i = 0; i < appWidgetIds.length; i++) {
+                appWidgetManager.updateAppWidget(appWidgetIds[i], views);
+            }
+            update(appWidgetManager, appWidgetIds, status);
+        } else {
+            RemoteViews views = new RemoteViews(getPackageName(), R.layout.pokemon_go_widget_initial_layout);
+            views.setViewVisibility(R.id.requestStatus, View.INVISIBLE);
+            for (int i = 0; i < appWidgetIds.length; i++) {
+                appWidgetManager.updateAppWidget(appWidgetIds[i], views);
+            }
+            update(appWidgetManager, appWidgetIds, status);
+            Log.d("NathanTesting", "Received callback from request");
+        }
     }
 
-    /**
-     * Handle action Foo in the provided background thread with the provided
-     * parameters.
-     */
-    private void handleActionFoo(String param1, String param2) {
-        // TODO: Handle action Foo
-        throw new UnsupportedOperationException("Not yet implemented");
-
-    }
-
-    /**
-     * Handle action Baz in the provided background thread with the provided
-     * parameters.
-     */
-    private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    private void update(AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    private void update(AppWidgetManager appWidgetManager, int[] appWidgetIds, int status) {
         Log.d("NathanTesting","update");
         for (int i = 0; i < appWidgetIds.length; i++) {
             int appWidgetId = appWidgetIds[i];
@@ -69,15 +67,15 @@ public class UpdateService extends IntentService {
 
             Intent update = new Intent(this, UpdateService.class);
             update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            update.putExtra("toRequest?", 1);
+            update.putExtra("ServerStatus", this.status);
 
             PendingIntent pendingIntent = PendingIntent.getService(this, 0, update,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             views.setOnClickPendingIntent(R.id.pokemonWidgetFrame, pendingIntent);
             Log.d("NathanTesting", "Set the click Listener?");
 
-            HandleRequests hr = new HandleRequests();
-            hr.requestServerStatus();
-            int status = hr.getServerStatusVariable();
+//            int status = hr.getServerStatusVariable();
             int color = getResources().getColor(R.color.orange);
             String statusText = "Unknown";
             if(status == 2) {
