@@ -12,7 +12,7 @@
     <string name="chinchalupa">Jeremy Wright</string>
     <string name="healbadbad">Nathan Blank</string>
 
-    <string name="websiteNote">We are currently using this website to get the server status: contact@cmmcd.com</string>
-    <string name="donateText">If you would like to donate to keep his server up follow this link: www.paypal.me/cmmcd</string>
+    <string name="websiteNote">We are using this website to get the server status: cmmcd.com/PokemonGo/</string>
+    <string name="donateText">If you would like to donate to keep his server up: paypal.me/cmmcd</string>
 
 </resources>
