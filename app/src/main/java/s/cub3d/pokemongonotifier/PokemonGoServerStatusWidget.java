@@ -37,10 +37,10 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
             final Intent intent = new Intent(context, UpdateService.class);
             intent.putExtra("ServerStatus",-1);
             intent.putExtra("toRequest?",1);
-            final PendingIntent pending = PendingIntent.getService(context, 0, intent, 0);
+            final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 //            alarm.cancel(pending);
-            long interval = 1000*2;
+            long interval = 1000*60;
             alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
         }
 

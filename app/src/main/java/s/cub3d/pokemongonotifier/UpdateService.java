@@ -30,6 +30,7 @@ public class UpdateService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.d("NathanTesting","Received intent");
+        Log.d("111111111111111111111", "1111111111111111111111111111111111111111111111111111111111111111111111111111111111");
         Bundle extras = intent.getExtras();
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = extras
