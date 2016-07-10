@@ -5,9 +5,11 @@ import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -61,15 +63,38 @@ public class UpdateService extends IntentService {
 
     private void update(AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         Log.d("NathanTesting","update");
-        RemoteViews views = new RemoteViews(getPackageName(), R.layout.pokemon_go_widget_initial_layout);
+        for (int i = 0; i < appWidgetIds.length; i++) {
+            int appWidgetId = appWidgetIds[i];
+            RemoteViews views = new RemoteViews(getPackageName(), R.layout.pokemon_go_widget_initial_layout);
 
-        Intent update = new Intent(this, UpdateService.class);
-        update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            Intent update = new Intent(this, UpdateService.class);
+            update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
 
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, update,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.pokemonWidgetFrame, pendingIntent);
+            PendingIntent pendingIntent = PendingIntent.getService(this, 0, update,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setOnClickPendingIntent(R.id.pokemonWidgetFrame, pendingIntent);
+            Log.d("NathanTesting", "Set the click Listener?");
 
+            int status = HandleRequests.getServerStatusVariable();
+            int color = getResources().getColor(R.color.orange);
+            String statusText = "Unknown";
+            if(status == 2) {
+                color = getResources().getColor(R.color.green);
+                statusText = "Online";
+            }
+            else if(status == 1) {
+                color = getResources().getColor(R.color.orange);
+                statusText = "Unstable";
+            }
+            else if(status == 0) {
+                color = getResources().getColor(R.color.red);
+                statusText = "Offline";
+            }
+            views.setTextViewText(R.id.statusText, statusText);
+            views.setTextColor(R.id.statusText, color);
+            views.setInt(R.id.statusBar, "setBackgroundColor", color);
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
     }
 
 }

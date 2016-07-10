@@ -10,7 +10,9 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:background="@color/gray"
-        android:id="@+id/pokemonWidgetFrame">
+        android:id="@+id/pokemonWidgetFrame"
+        android:clickable="true"
+        android:contextClickable="true">
 
 
         <LinearLayout
@@ -50,7 +52,8 @@
             android:layout_centerVertical="true"
             android:background="@color/green"
             android:layout_toRightOf="@+id/linearLayout"
-            android:layout_toEndOf="@+id/linearLayout">
+            android:layout_toEndOf="@+id/linearLayout"
+            android:id="@+id/statusBar">
 
         </LinearLayout>
     </RelativeLayout>

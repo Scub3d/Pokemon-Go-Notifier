@@ -9,11 +9,11 @@ import org.json.JSONException;
  */
 public class HandleRequests implements HandleResponseInterface {
 
-    private int serverStatus = -1;
+    private static int serverStatus = -1;
     // 0 = red, 1 = yellow, 2 = green
 
-    public int getServerStatusVariable() {
-        return this.serverStatus;
+    public static int getServerStatusVariable() {
+        return serverStatus;
     }
 
     public void requestServerStatus() {
