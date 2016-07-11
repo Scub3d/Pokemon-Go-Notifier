@@ -17,10 +17,11 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
     private boolean alarmEnabled = true;
     private boolean alarmActive = false;
 
+    private Context _context;
+
     public static String PACKAGE_NAME;
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-
         // Useful for setting loading spinner
         PACKAGE_NAME = context.getPackageName();
         Intent update = new Intent(context, UpdateService.class);
@@ -32,17 +33,18 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
         context.startService(update);
         Log.d("NathanTesting", "Started the service!");
 
-//        if(alarmEnabled){
-//            Log.d("NathanTesting", "Started the Alarm");
-//            final Intent intent = new Intent(context, UpdateService.class);
-//            intent.putExtra("ServerStatus",-1);
-//            intent.putExtra("toRequest?",1);
-//            final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-////            alarm.cancel(pending);
-//            long interval = 1000*60;
-//            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
-//        }
+        if(alarmEnabled){
+            Log.d("NathanTesting", "Started the Alarm");
+            final Intent intent = new Intent(context, UpdateService.class);
+            intent.putExtra("ServerStatus",-1);
+            intent.putExtra("toRequest?",1);
+            final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//            alarm.cancel(pending);
+            long interval = 1000*60;
+            alarm.cancel(pending);
+            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
+        }
 
 
         final int N = appWidgetIds.length;

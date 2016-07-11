@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
         s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.d("chchchchc", "+ " + isChecked);
-                if(isChecked)
-                    PokemonGoServerStatusWidget.createAlarm(getApplicationContext());
-                else
-                    PokemonGoServerStatusWidget.cancelAlarm(getApplicationContext());
+//                if(isChecked)
+//                    PokemonGoServerStatusWidget.createAlarm(getBaseContext());
+//                else
+//                    PokemonGoServerStatusWidget.cancelAlarm(getBaseContext());
             }
         });
     }
