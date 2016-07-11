@@ -20,30 +20,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/settingSwitchText"
-        android:id="@+id/switch1"
-        android:layout_marginTop="22dp"
-        android:textSize="22dp"
-        android:layout_below="@+id/textView10"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/settingSwitchNoteText"
-        android:id="@+id/textView2"
-        android:nestedScrollingEnabled="false"
-        android:layout_below="@+id/switch1"
-        android:paddingTop="5dp"
-        android:layout_alignLeft="@+id/switch1"
-        android:layout_alignStart="@+id/switch1"
-        android:layout_alignRight="@+id/switch1"
-        android:layout_alignEnd="@+id/switch1" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,9 +28,10 @@
         android:id="@+id/textView3"
         android:layout_gravity="center_vertical"
         android:textSize="26dp"
-        android:layout_below="@+id/textView2"
+        android:paddingTop="5dp"
+        android:layout_below="@+id/textView10"
         android:layout_centerHorizontal="true"
-        android:paddingTop="5dp" />
+        android:layout_marginTop="35dp" />
 
     <TextView
         android:layout_width="wrap_content"

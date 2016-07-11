@@ -38,18 +38,18 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
         context.startService(update);
         Log.d("NathanTesting", "Started the service!");
 
-        if(alarmEnabled){
-            Log.d("NathanTesting", "Started the Alarm");
-            final Intent intent = new Intent(context, UpdateService.class);
-            intent.putExtra("ServerStatus",-1);
-            intent.putExtra("toRequest?",1);
-            final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//        if(alarmEnabled){
+//            Log.d("NathanTesting", "Started the Alarm");
+//            final Intent intent = new Intent(context, UpdateService.class);
+//            intent.putExtra("ServerStatus",-1);
+//            intent.putExtra("toRequest?",1);
+//            final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+////            alarm.cancel(pending);
+//            long interval = 1000*60;
 //            alarm.cancel(pending);
-            long interval = 1000*60;
-            alarm.cancel(pending);
-//            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
-        }
+////            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
+//        }
 
 
         final int N = appWidgetIds.length;
@@ -72,36 +72,36 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
         }
     }
 
-    public static void createAlarm(Context context) {
-        Log.d("NathanTesting", "+ Created Alarm" );
-        if(widgetIds == null){
-            Log.d("NathanTesting", "AW HELL NAW");
-        }
-        final Intent intent = new Intent(context, UpdateService.class);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
-        intent.putExtra("ServerStatus",-1);
-        intent.putExtra("toRequest?",1);
-        final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        if(alarm == null){
-            alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        }
-        long interval = 1000*60;
-        alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
-    }
-
-    public static void cancelAlarm(Context context) {
-        Log.d("NathanTesting", "+ Canceled Alarm");
-        final Intent intent = new Intent(context, UpdateService.class);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
-        intent.putExtra("ServerStatus",-1);
-        intent.putExtra("toRequest?",1);
-        final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        if(alarm == null) {
-            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            alarm.cancel(pending);
-        } else {
-            alarm.cancel(pending);
-        }
-    }
+//    public static void createAlarm(Context context) {
+//        Log.d("NathanTesting", "+ Created Alarm" );
+//        if(widgetIds == null){
+//            Log.d("NathanTesting", "AW HELL NAW");
+//        }
+//        final Intent intent = new Intent(context, UpdateService.class);
+//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
+//        intent.putExtra("ServerStatus",-1);
+//        intent.putExtra("toRequest?",1);
+//        final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        if(alarm == null){
+//            alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//        }
+//        long interval = 1000*60;
+//        alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
+//    }
+//
+//    public static void cancelAlarm(Context context) {
+//        Log.d("NathanTesting", "+ Canceled Alarm");
+//        final Intent intent = new Intent(context, UpdateService.class);
+//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
+//        intent.putExtra("ServerStatus",-1);
+//        intent.putExtra("toRequest?",1);
+//        final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        if(alarm == null) {
+//            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//            alarm.cancel(pending);
+//        } else {
+//            alarm.cancel(pending);
+//        }
+//    }
 
 }

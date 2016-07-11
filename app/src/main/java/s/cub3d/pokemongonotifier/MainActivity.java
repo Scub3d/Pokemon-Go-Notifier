@@ -44,20 +44,20 @@ public class MainActivity extends AppCompatActivity {
         TextView t9 = (TextView) findViewById(R.id.textView9);
         t9.setMovementMethod(LinkMovementMethod.getInstance());
 
-        Switch s = (Switch) findViewById(R.id.switch1);
+        //Switch s = (Switch) findViewById(R.id.switch1);
 
-        s.setChecked(Boolean.valueOf(readFromFile()));
-
-        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("chchchchc", "+ " + isChecked);
-                if(isChecked)
-                    PokemonGoServerStatusWidget.createAlarm(getBaseContext());
-                else
-                    PokemonGoServerStatusWidget.cancelAlarm(getBaseContext());
-                writeToFile(String.valueOf(isChecked));
-            }
-        });
+//        s.setChecked(Boolean.valueOf(readFromFile()));
+//
+//        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                Log.d("chchchchc", "+ " + isChecked);
+//                if(isChecked)
+//                    PokemonGoServerStatusWidget.createAlarm(getBaseContext());
+//                else
+//                    PokemonGoServerStatusWidget.cancelAlarm(getBaseContext());
+//                writeToFile(String.valueOf(isChecked));
+//            }
+//        });
     }
 
     @Override
