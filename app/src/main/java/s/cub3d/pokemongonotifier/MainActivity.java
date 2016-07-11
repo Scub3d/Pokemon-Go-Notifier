@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-	HandleRequests hr = new HandleRequests();
+	    HandleRequests hr = new HandleRequests();
         hr.requestServerStatus();
 
         TextView t8 = (TextView) findViewById(R.id.textView8);

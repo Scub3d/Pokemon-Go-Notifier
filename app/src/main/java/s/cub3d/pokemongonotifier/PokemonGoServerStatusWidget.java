@@ -96,7 +96,11 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
         intent.putExtra("ServerStatus",-1);
         intent.putExtra("toRequest?",1);
         final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if(alarm == null) {
+            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            alarm.cancel(pending);
+            return;
+        }
         alarm.cancel(pending);
     }
 
