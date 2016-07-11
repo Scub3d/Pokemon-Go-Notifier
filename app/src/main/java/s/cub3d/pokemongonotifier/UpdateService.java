@@ -7,10 +7,14 @@ import android.content.Intent;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -30,11 +34,11 @@ public class UpdateService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Bundle extras = intent.getExtras();
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        int[] appWidgetIds = extras
+        final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        final int[] appWidgetIds = extras
                 .getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
         int toRequest = extras.getInt("toRequest?");
-        int status = extras.getInt("ServerStatus");
+        final int status = extras.getInt("ServerStatus");
         this.status = status;
         if(toRequest==1){
             HandleRequests hr = new HandleRequests();
@@ -48,12 +52,20 @@ public class UpdateService extends IntentService {
             }
             update(appWidgetManager, appWidgetIds, status);
         } else {
-            RemoteViews views = new RemoteViews(getPackageName(), R.layout.pokemon_go_widget_initial_layout);
-            views.setViewVisibility(R.id.requestStatus, View.INVISIBLE);
-            for (int i = 0; i < appWidgetIds.length; i++) {
-                appWidgetManager.updateAppWidget(appWidgetIds[i], views);
+            {
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        RemoteViews views = new RemoteViews(getPackageName(), R.layout.pokemon_go_widget_initial_layout);
+                        views.setViewVisibility(R.id.requestStatus, View.INVISIBLE);
+                        for (int i = 0; i < appWidgetIds.length; i++) {
+                            appWidgetManager.updateAppWidget(appWidgetIds[i], views);
+                        }
+                        update(appWidgetManager, appWidgetIds, status);
+                    }
+                }, 1000);
+
             }
-            update(appWidgetManager, appWidgetIds, status);
         }
     }
 

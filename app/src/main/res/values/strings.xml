@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Pokemon Go Notifier</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Add the widget to a screen</string>
     <string name="pokemon_go_status">Pokemon Go Status</string>
     <string name="online_text">Online</string>
-    <string name="settingMainText">The widget will update itself on tap/press.</string>
+    <string name="settingMainText">The widget will update on tap/press.</string>
     <string name="settingSwitchText">Update Widget Every Minute</string>
-    <string name="settingSwitchNoteText">*If this is switched on, the widget will update itself every minute. This however, will increase battery consumption.</string>
 
     <string name="about">About</string>
     <string name="aboutNote">This was made by: </string>
