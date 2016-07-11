@@ -38,18 +38,18 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
         context.startService(update);
         Log.d("NathanTesting", "Started the service!");
 
-//        if(alarmEnabled){
-//            Log.d("NathanTesting", "Started the Alarm");
-//            final Intent intent = new Intent(context, UpdateService.class);
-//            intent.putExtra("ServerStatus",-1);
-//            intent.putExtra("toRequest?",1);
-//            final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-////            alarm.cancel(pending);
-//            long interval = 1000*60;
+        if(alarmEnabled){
+            Log.d("NathanTesting", "Started the Alarm");
+            final Intent intent = new Intent(context, UpdateService.class);
+            intent.putExtra("ServerStatus",-1);
+            intent.putExtra("toRequest?",1);
+            final PendingIntent pending = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 //            alarm.cancel(pending);
+            long interval = 1000*60;
+            alarm.cancel(pending);
 //            alarm.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + interval,interval, pending);
-//        }
+        }
 
 
         final int N = appWidgetIds.length;
@@ -99,9 +99,9 @@ public class PokemonGoServerStatusWidget extends AppWidgetProvider {
         if(alarm == null) {
             final AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarm.cancel(pending);
-            return;
+        } else {
+            alarm.cancel(pending);
         }
-        alarm.cancel(pending);
     }
 
 }
