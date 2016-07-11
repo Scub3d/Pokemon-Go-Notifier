@@ -29,8 +29,6 @@ public class UpdateService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.d("NathanTesting","Received intent");
-        Log.d("111111111111111111111", "1111111111111111111111111111111111111111111111111111111111111111111111111111111111");
         Bundle extras = intent.getExtras();
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = extras
@@ -56,12 +54,10 @@ public class UpdateService extends IntentService {
                 appWidgetManager.updateAppWidget(appWidgetIds[i], views);
             }
             update(appWidgetManager, appWidgetIds, status);
-            Log.d("NathanTesting", "Received callback from request");
         }
     }
 
     private void update(AppWidgetManager appWidgetManager, int[] appWidgetIds, int status) {
-        Log.d("NathanTesting","update");
         for (int i = 0; i < appWidgetIds.length; i++) {
             int appWidgetId = appWidgetIds[i];
             RemoteViews views = new RemoteViews(getPackageName(), R.layout.pokemon_go_widget_initial_layout);
@@ -74,9 +70,7 @@ public class UpdateService extends IntentService {
             PendingIntent pendingIntent = PendingIntent.getService(this, 0, update,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             views.setOnClickPendingIntent(R.id.pokemonWidgetFrame, pendingIntent);
-            Log.d("NathanTesting", "Set the click Listener?");
 
-//            int status = hr.getServerStatusVariable();
             int color = getResources().getColor(R.color.orange);
             String statusText = "Unknown";
             if(status == 2) {

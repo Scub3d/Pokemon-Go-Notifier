@@ -52,7 +52,6 @@ public class HandleRequests implements HandleResponseInterface {
         update.putExtra("toRequest?",0);
 
         thisContext.startService(update);
-        Log.d("=====================", value);
     }
 
     @Override
